@@ -7,12 +7,11 @@ body {
     padding: 32px 24px;
 }
 
-.header {
-    margin-bottom: 48px auto;
-    z-index: 99;
-    position: relative;    
+.header { 
+    margin: 40px auto;
+    z-index: 999;
+    position: relative;
     max-width: 700px;
-    margin: 30px auto;
 }
 
 .header h1 {
@@ -34,7 +33,6 @@ body {
 }
 
 .card {
-    
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     padding: 32px;
@@ -48,15 +46,15 @@ body {
 }
 
 .form-group textarea {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    width: 100%;
-    min-height: 120px;
-    padding: 16px;
-    border: 1px solid #474646;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-bottom: 20px;
+   background-color: rgba(255, 255, 255, 0.05);
+   color: #ffffff;
+   width: 100%;
+   min-height: 120px;
+   padding: 16px;
+   border: 1px solid #474646;
+   border-radius: 8px;
+   font-size: 16px;
+   margin-bottom: 20px;
 }
 
 .form-group textarea:focus {
@@ -65,7 +63,7 @@ body {
 }
 
 .form-group textarea::placeholder {
-    color:#a19e9e;
+    color: #a19e9e;
 }
 
 .form-group .btn-magic {
@@ -80,7 +78,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.btn-magic:hover {
+.form-group .btn-magic:hover {
     transform: translateY(-2px);
 }
 
@@ -99,13 +97,13 @@ body {
     border-radius: 16px;
     padding: 24px;
     width: 50%;
-
 }
 
 .code-title {
     font-size: 20px;
     margin-bottom: 16px;
 }
+
 .code-block {
     background-color: #0a0c10;
     color: #5eead4;
@@ -115,5 +113,6 @@ body {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
 
 

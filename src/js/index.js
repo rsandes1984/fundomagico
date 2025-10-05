@@ -1,47 +1,68 @@
-function setLoading( isLoading) {
-    const btnSpan = document.getAnimations('generate-btn');
+function setLoading(isLoading) {
+	const btnSpan = document.getElementById("generate-btn");
 
-    if (isLoading) {
-        btnSpan.innerHTML = 'Gerando Backgroud...';
-    }else{
-        btnSpan.innerHTML = "Gerar Background Mágico";
-    }
+	if (isLoading) {
+		btnSpan.innerHTML = "Gerando Backgroud...";
+	} else {
+		btnSpan.innerHTML = "Gerar Background Mágico";
+	}
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+	// 1. No JavaScript, pegar o evento de submit do formulário para evitar o recarregamento da página.
 
-document.addEventListener('DOMContentLoaded', function () {
-   
-    const form = document.querySelector('.form-group');
-    const textArea = document.getElementById('description');
-    const htmlCode = document.getElementById()
+	const form = document.querySelector(".form-group");
+	const textArea = document.getElementById("description");
+	const htmlCode = document.getElementById("html-code");
+	const cssCode = document.getElementById("css-code");
+	const preview = document.getElementById("preview-section");
 
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
+	form.addEventListener("submit", async function (event) {
+		event.preventDefault();
 
-        const description = textArea.value.trim();
+		// 2. Obter o valor digitado pelo usuário no campo de texto.
+		const description = textArea.value.trim();
 
-        if(!description) {
-            return;
-        }
-    
-    setLoading(true);
+		if (!description) {
+			return;
+		}
 
-    try {
+		// 3. Exibir um indicador de carregamento enquanto a requisição está sendo processada.
+		setLoading(true);
 
-        const response = await fetch('link https://rsandes1984.app.n8n.cloud/webhook-test/6838e40f-4414-4b21-891f-92acd77b8680 n8n' , {
-            method: 'POST',
-            headers: {'Content-Type': 'appliction/json'};
-            body: JSON.stringify({description})
-        });
+		// 4. Fazer uma requisição HTTP (POST) para a API do n8n, enviando o texto do formulário no corpo da requisição em formato JSON.
+		try {
+			const response = await fetch("https://robertodias123.app.n8n.cloud/webhook/gerador-fundo", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ description }),
+			});
 
-        const data = await response.json();
+			const data = await response.json();
+			htmlCode.textContent = data.code || "";
+			cssCode.textContent = data.style || "";
 
-        
-    }catch {
+			preview.style.display = "block";
+			preview.innerHTML = data.code || "";
 
-    }finally{
+			let styleTag = document.getElementById("dynamic-style");
 
-    }
+			if (styleTag) styleTag.remove();
 
-   });
+			if (data.style) {
+				styleTag = document.createElement("style");
+				styleTag.id = "dynamic-style";
+
+				styleTag.textContent = data.style;
+				document.head.appendChild(styleTag);
+			}
+		} catch (error) {
+			console.error("Erro ao gerar o fundo:", error);
+			htmlCode.textContent = "Não consegui gerar o código HTML, tente novamente";
+			cssCode.textContent = "Não consegui gerar o código CSS, tente novamente";
+			preview.innerHTML = "";
+		} finally {
+			setLoading(false);
+		}
+	});
 });
