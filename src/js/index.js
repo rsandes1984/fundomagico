@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		// 4. Fazer uma requisição HTTP (POST) para a API do n8n, enviando o texto do formulário no corpo da requisição em formato JSON.
 		try {
-			const response = await fetch("https://robertodias123.app.n8n.cloud/webhook/gerador-fundo", {
+			const response = await fetch("https://rsandes1984.app.n8n.cloud/webhook/gerador-fundo", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ description }),
